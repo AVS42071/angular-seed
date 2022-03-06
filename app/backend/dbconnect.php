@@ -2,19 +2,28 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("myServer", "myUser", "myPassword", "Northwind");
+class DBO {
+  private $servername;
+  private $username;
+  private $password;
+  private $dbname;
+  private $charset;
 
-$result = $conn->query("SELECT CompanyName, City, Country FROM Customers");
-
-$outp = "";
-while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-  if ($outp != "") {$outp .= ",";}
-  $outp .= '{"Name":"'  . $rs["CompanyName"] . '",';
-  $outp .= '"City":"'   . $rs["City"]        . '",';
-  $outp .= '"Country":"'. $rs["Country"]     . '"}';
+  public function connect() {
+    $this->servername = "localhost";
+    $this->username = "root";
+    $this->password = "";
+    $this->dbname = "SuperiorCleaning";
+    $this->charset = "utf8mb4";
+    try{
+      $dsn = "mysql:host=".$this->servername.";dbname=".$this->dbname.";charset=".$this->charset;
+      $pdo = new PDO($dsn, $this->username, $this->password);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      return $pdo;
+    } catch (PDOException $e){
+      echo "Connection failed: ".$e->getMessage();
+    }
+   
+  }
 }
-$outp ='{"records":['.$outp.']}';
-$conn->close();
-
-echo($outp);
 ?>

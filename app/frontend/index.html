@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" > 
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>WebApp</title>
+  <meta name="description" content="">
+</head>
+<body>
+ <p>Employee Info: <span id="info"></span></p>
+
+  <script>
+  showHint();
+  function showHint() {
+    var userid = "2343";
+    var position = "1";
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+      document.getElementById("info").innerHTML = this.responseText;
+    }
+  xmlhttp.open("POST", "http://localhost/index.php?userid=" + userid + "&position=" + position);
+  xmlhttp.send();
+}
+  </script>
+</body>
+</html>
