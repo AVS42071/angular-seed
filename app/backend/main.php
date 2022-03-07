@@ -1,4 +1,4 @@
- <?php
+<?php
   include_once 'dbconnect.php';
   include_once 'commands.php';
   $userid = $_GET["userid"];

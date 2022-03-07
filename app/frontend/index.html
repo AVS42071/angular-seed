@@ -19,7 +19,7 @@
     xmlhttp.onload = function() {
       document.getElementById("info").innerHTML = this.responseText;
     }
-  xmlhttp.open("POST", "http://localhost/index.php?userid=" + userid + "&position=" + position);
+  xmlhttp.open("POST", "http://localhost/backend/main.php?userid=" + userid + "&position=" + position);
   xmlhttp.send();
 }
   </script>

@@ -1,5 +1,4 @@
 <?php
-
 class User extends  DBO {
 
   public function getAllUsers(){
